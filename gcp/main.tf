@@ -31,19 +31,19 @@ resource "google_project_service" "network" {
   service = "compute.googleapis.com"
 
   provisioner "local-exec" {
-    command = "gcloud -q compute firewall-rules default-allow-icmp --project=${self.project}"
+    command = "gcloud -q compute firewall-rules delete default-allow-icmp --project=${self.project}"
   }
 
   provisioner "local-exec" {
-    command = "gcloud -q compute firewall-rules default-allow-internal --project=${self.project}"
+    command = "gcloud -q compute firewall-rules delete default-allow-internal --project=${self.project}"
   }
 
   provisioner "local-exec" {
-    command = "gcloud -q compute firewall-rules default-allow-rdp --project=${self.project}"
+    command = "gcloud -q compute firewall-rules delete default-allow-rdp --project=${self.project}"
   }
 
   provisioner "local-exec" {
-    command = "gcloud -q compute firewall-rules default-allow-ssh --project=${self.project}"
+    command = "gcloud -q compute firewall-rules delete default-allow-ssh --project=${self.project}"
   }
 
   provisioner "local-exec" {
