@@ -1,3 +1,4 @@
 *.tfstate*
 *.terraform
 gcp/.terraform
+*.tf.save
