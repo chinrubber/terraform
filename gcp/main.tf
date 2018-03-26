@@ -29,6 +29,10 @@ resource "google_project" "network" {
 resource "google_project_service" "network" {
   project = "${google_project.network.project_id}"
   service = "compute.googleapis.com"
+
+  provisioner "local-exec" {
+    command = "gcloud -q compute networks delete default --project=${self.project}"
+  }
 }
 
 resource "google_compute_shared_vpc_host_project" "network" {
