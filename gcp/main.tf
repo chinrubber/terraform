@@ -23,7 +23,7 @@ resource "google_project" "network" {
   name            = "Network"
   billing_account = "${var.billing_account_id}"
   project_id      = "p${random_id.network_project_id.hex}"
-  folder_id	      = "${google_folder.network.name}"
+  folder_id       = "${google_folder.network.name}"
 }
 
 resource "google_project_service" "network" {
