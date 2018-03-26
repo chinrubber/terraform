@@ -22,7 +22,7 @@ resource "google_folder" "network" {
 resource "google_project" "network" {
   name            = "Network"
   billing_account = "${var.billing_account_id}"
-  project_id      = "${random_id.network_project_id.hex}"
+  project_id      = "p${random_id.network_project_id.hex}"
   folder_id	      = "${google_folder.network.name}"
 }
 
@@ -59,12 +59,19 @@ resource "google_compute_shared_vpc_host_project" "network" {
 resource "google_compute_network" "network-01" {
   name                    = "network-01"
   auto_create_subnetworks = "false"  
-  project                 = "${google_project.network.project_id}"
+  project                 = "${google_compute_shared_vpc_host_project.network.project}"
 }
 
 resource "google_compute_subnetwork" "network-01-subnet-01" {
   name                    = "subnetwork-01"
   network                 = "${google_compute_network.network-01.name}"
   ip_cidr_range           = "10.1.1.0/24"
+  project                 = "${google_compute_shared_vpc_host_project.network.project}"
+}
+
+resource "google_compute_subnetwork" "network-01-subnet-02" {
+  name                    = "subnetwork-02"
+  network                 = "${google_compute_network.network-01.name}"
+  ip_cidr_range           = "10.1.2.0/24"
   project                 = "${google_compute_shared_vpc_host_project.network.project}"
 }
