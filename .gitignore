@@ -2,3 +2,4 @@
 *.terraform
 gcp/.terraform
 *.tf.save
+*.save*
